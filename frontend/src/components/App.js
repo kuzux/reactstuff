@@ -1,25 +1,31 @@
 // @flow
 
-import React from 'react';
-import logo from '../resources/logo.svg';
+import React, { Element } from 'react';
 import './App.css';
+import { connect } from 'react-redux';
+import { Map } from 'immutable';
+
+import Header from './Header'
 
 import { Grid } from 'react-bootstrap';
 
-const App = (props: { [key: string]: string }) => {
+const App = (props: { children: Array<Element<any>> }): Element<any> => {
   return (
     <Grid>
       <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <Header />
+        { props.children }
       </div>
     </Grid>
   );
 };
 
-export default App;
+const mapStateToProps = (state: Map<any, any>): {} => {
+    return {};
+};
+
+const mapDispatchToProps = (dispatch: any): {} => {
+    return {};
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
