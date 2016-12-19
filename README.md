@@ -1,12 +1,12 @@
 # elmstuff
-Playing around with elm, nothing special really.
+Playing around with react, nothing special really.
 
 Current state: Some sort of todo list / isssue tracker, with no backend or any kind of data persistence.
 
 ## Running
 
-Just run `elm-reactor`, it works with it. I currently have no idea how to use `elm-build`.
+Just run `npm run start`, it works with it. Use `npm run build` to get a production build, but that is very untested.
 
 ## Testing
 
-Install elm-test with `npm install -g elm-test`. Assuming you have npm, if not, how on earth did you install elm itself? Then run `elm-test` which then runs and fails (tests are outdated, as is tradition).
+Run `npm run flow` to check for type errors. Run `npm run test` to run the tests but they are ranging from very-outdated to simply nonexistent.
