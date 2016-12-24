@@ -12,12 +12,15 @@ const createIssue = (id: number, name: string): Issue => {
 }
 
 const update = (prev: Record<Model>, action: Event): Record<Model> => {
-    switch(action.type) {
-        case 'NEW_ISSUE':
-        new Model({ 
+    if(action.type === 'NEW_ISSUE') {
+        return new Model({ 
             issues: prev.get('issues').push(createIssue(prev.get('numIssues') + 1, prev.get('name'))), 
             numIssues: prev.get('numIssues') + 1 });
-        case 'CLOSE_ISSUE':
+    } else if(action.type === 'CLOSE_ISSUE') {
+        const oldIssue = prev.get('issues').get(action.id);
+        const newIssue = new Issue({ id: action.id, name:oldIssue.name, issueType: 'CLOSED' });
+        return prev.set('issues', prev.get('issues').set(action.id, newIssue));
+    } else if(action.type === 'FILTER_ISSUES') {
         return prev;
     }
 
