@@ -1,6 +1,6 @@
 // @flow
 
-import { Issue, Model } from '../Model';
+import { Issue, Model, Filter } from '../Model';
 import { Record } from 'immutable';
 
 type Event = { type: 'NEW_ISSUE', name: string }
@@ -9,6 +9,10 @@ type Event = { type: 'NEW_ISSUE', name: string }
 
 const createIssue = (id: number, name: string): Issue => {
     return new Issue({ id: id, name: name, issueType: 'OPEN'});
+}
+
+const createFilter = (text: string): Issue => {
+    return new Filter({ filterType: 'OPEN', filterText: text });
 }
 
 const update = (prev: Record<Model>, action: Event): Record<Model> => {
@@ -21,7 +25,7 @@ const update = (prev: Record<Model>, action: Event): Record<Model> => {
         const newIssue = new Issue({ id: action.id, name:oldIssue.name, issueType: 'CLOSED' });
         return prev.set('issues', prev.get('issues').set(action.id, newIssue));
     } else if(action.type === 'FILTER_ISSUES') {
-        return prev;
+        return prev.set('filter', createFilter(action.filter));
     }
 
     return prev;

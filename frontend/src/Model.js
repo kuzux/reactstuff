@@ -4,6 +4,11 @@ import { Record, List } from 'immutable';
 
 type IssueType = 'OPEN' | 'CLOSED' | 'DOING' | 'WONTFIX';
 
+const Filter = Record({ 
+    filterType: 'OPEN',
+    filterText: ""
+});
+
 const Issue = Record({
     id: 0,
     name: "",
@@ -11,8 +16,9 @@ const Issue = Record({
 });
 
 const Model = Record({
-    issues : new List(),
-    numIssues : 0
+    issues: new List(),
+    numIssues: 0,
+    filter: new Filter()
 });
 
-export { Issue, Model };
+export { Issue, Model, Filter };
